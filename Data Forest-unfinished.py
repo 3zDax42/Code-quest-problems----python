@@ -2,23 +2,35 @@ def SplitList(NumList, CallNum = 0):
     Mid = NumList[len(NumList)//2]
     List1 = []
     List2 = []
-    print("   " * (len(NumList)//2), end="")
-    if CallNum == 0:
-        print(Mid)
-    else: print(Mid, end="")
+
     for i in NumList:
         if i < Mid:
             List1.append(i)
         elif i > Mid:
             List2.append(i)
-    CallNum+= 1
-    if len(List1) == 1:
-        print(List1[0], end="   ")
-        print(List2[0])
-        return
+
+    #print(Mid)
+
+    
+
+    print("   " * (len(NumList)//2), end="")
+    if len(str(Mid)) == 1:
+        print("  ", end="")
+    elif len(str(Mid)) == 2:
+        print(" ", end="")
+    if CallNum == 0:
+        print(Mid)
     else:
-        SplitList(List1, CallNum)
-        SplitList(List2, CallNum)
+        print(Mid, end="")
+    
+    if len(List1) != 1:
+        a, b = SplitList(List1, CallNum+1)
+        c, d = SplitList(List2)
+    else:
+        # print(List1[0], end="   ")
+        # print(List2[0])
+        return List1[0], List2[0]
+    print(a, "   ", b, "   ", c, "   ", d)
 
 testcases = int(input())
 for i in range(testcases):
@@ -27,5 +39,5 @@ for i in range(testcases):
     for i in imput:
         numbers.append(int(i))
     numbers.sort()
-    print(numbers)
+    print(numbers, "Not in function")
     SplitList(numbers)
