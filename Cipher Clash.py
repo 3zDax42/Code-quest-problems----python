@@ -18,7 +18,8 @@ for _ in range(n_cases):
     Letters = []
     for i in Sentence1[int(Word[0])]:
         Letters.append(i)
-    
+    for i in range(len(Letters)):
+        
     print(Word)
     print(Sentence1)
     print(Sentence2)
