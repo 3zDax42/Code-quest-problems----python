@@ -1,25 +1,31 @@
 def Better_Round(val:float, n_digits:int = 0):
     val *= 10**n_digits
-    result = int(val + (0.50002 if val >= 0 else -0.0002))
+    result = int(val + (0.50002 if val >= 0 else -0.50002))
     return result / 10**n_digits
-n_cases = int(input())
 
+n_cases = int(input())
 for _ in range(n_cases):
-    N_Input = input().split('"')
-    for i in N_Input:
-        if i == '' or i == ' ':
-            N_Input.remove(i)
-    Word = N_Input[0]
-    N_Input.remove(Word)
-    Word = "".join([c for c in Word if c not in ["[", "]"]]) #removing characters from a string
-    Word = Word.split(',')
-    Sentence1 = N_Input[0].split()
-    Sentence2 = N_Input[1].split()
+    N_lines = input().split('"')
+    for i in N_lines:
+        if i in [" ", ""]:
+            N_lines.remove(i)
+    Sentence1 = N_lines[1].split()
+    Sentence2 = N_lines[2].split()
+    Words = N_lines[0]
+    Words = "".join([c for c in Words if c not in [" ", "[", "]"]])
+    Words = Words.split(',')
     Letters = []
-    for i in Sentence1[int(Word[0])]:
+    for i in Sentence1[int(Words[0]) - 1]:
         Letters.append(i)
-    for i in range(len(Letters)):
-        
-    print(Word)
-    print(Sentence1)
-    print(Sentence2)
+    
+    if len(Letters) == len(Sentence2[int(Words[1]) - 1]):
+        for i in range(len(Letters)):
+            if Sentence2[int(Words[1]) - 1][i] in Letters:
+                Letters.remove(Sentence2[int(Words[1]) - 1][i])
+            else:
+                print("Intercepted")
+                break
+        else:    
+            print("Verified")
+    else:
+        print("Intercepted")
